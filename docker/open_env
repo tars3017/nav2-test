@@ -1,0 +1,1 @@
+docker compose -f ./compose.yaml run --rm nav2-dev

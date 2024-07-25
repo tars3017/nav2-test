@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.5)
+project(nav2_bringup)
+
+find_package(ament_cmake REQUIRED)
+find_package(nav2_common REQUIRED)
+find_package(navigation2 REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(nav2_util REQUIRED)
+
+add_executable(odom_sim src/odom_sim.cpp)
+ament_target_dependencies(odom_sim rclcpp nav_msgs tf2_ros tf2 nav_msgs nav2_util)
+
+nav2_package()
+
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY maps DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY rviz DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY worlds DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY params DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY urdf DESTINATION share/${PROJECT_NAME})
+install(TARGETS odom_sim DESTINATION lib/${PROJECT_NAME})
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()

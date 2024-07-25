@@ -1,0 +1,27 @@
+version: '3'
+services:
+  nav2-dev:
+    build:
+      context: .
+    image: nav2-env
+    container_name: nav2-dev
+    stdin_open: true
+    tty: true
+    privileged: true
+    network_mode: host
+
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
+      - $HOME/.Xauthority:/home/user/.Xauthority
+      - /home/tars3017/Documents/DIT/nav2-ws:/root/nav2-ws
+
+    environment:
+      - DISPLAY=$DISPLAY
+      - XAUTHORITY=/home/user/.Xauthority
+
+    working_dir: /root/nav2-ws
+
+    command: /bin/bash
